@@ -17,15 +17,19 @@ public class TriggerZone : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.left * 10, ForceMode2D.Impulse);
         distance = Vector3.Distance(planets[0].transform.position, transform.position);
+        planets[0].GetComponent<SpriteRenderer>().color = Color.red;
         planet_pos = planets[0].transform.position;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-         
-       foreach (GameObject planet in planets) {
+        distance = Vector3.Distance(planets[0].transform.position, transform.position);
+
+        foreach (GameObject planet in planets) {
             float distcheck = Vector3.Distance(planet.transform.position, transform.position);
+            //planet.GetComponent<SpriteRenderer>().color = Color.white;
             if (distcheck < distance) {
+                planet.GetComponent<SpriteRenderer>().color = Color.red;
                 planet_pos = planet.transform.position;
                 distance = distcheck;
             }
